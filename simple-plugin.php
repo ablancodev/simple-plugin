@@ -52,7 +52,7 @@ class SimplePlugin_Plugin {
 
 		add_action('admin_init', array ( __CLASS__, 'admin_init' ) );
 
-		register_activation_hook( INVOICES_FILE, array( __CLASS__, 'activate' ) );
+		register_activation_hook( SIMPLE_PLUGIN_FILE, array( __CLASS__, 'activate' ) );
 
 	}
 	public static function wp_init() {
@@ -113,7 +113,7 @@ class SimplePlugin_Plugin {
 
 	public static function simple_plugin_menu_settings() {
 		// if submit
-		if ( wp_verify_nonce ( $_POST ["simple_plugin_settings"], "simple_plugin_settings" ) ) {
+		if ( isset( $_POST ["simple_plugin_settings"] ) && wp_verify_nonce ( $_POST ["simple_plugin_settings"], "simple_plugin_settings" ) ) {
 			// name
 			update_option ( "simple_plugin_settings_name", sanitize_text_field ( $_POST ["simple_plugin_settings_name"] ) );
 		}
